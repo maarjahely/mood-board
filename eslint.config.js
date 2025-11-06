@@ -5,7 +5,7 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import { defineConfig, globalIgnores } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier";
-import eslintPluginPrettier from "eslint-plugin-prettier";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 
 export default defineConfig([
   globalIgnores(["dist"]),
@@ -13,7 +13,7 @@ export default defineConfig([
     files: ["**/*.{ts,tsx}"],
     extends: [
       js.configs.recommended,
-      tseslint.configs.recommended,
+      tseslint.configs.recommendedTypeChecked,
       reactHooks.configs["recommended-latest"],
       reactRefresh.configs.vite,
       eslintConfigPrettier,
@@ -21,10 +21,19 @@ export default defineConfig([
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      parserOptions: {
+        project: ["./tsconfig.app.json", "./tsconfig.json"].filter(Boolean),
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
-    plugins: {
-      eslintPluginPrettier,
+    plugins: { "simple-import-sort": simpleImportSort },
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
+      "simple-import-sort/imports": "warn",
+      "simple-import-sort/exports": "warn",
     },
-    rules: { "prettier/prettier": "warn" },
   },
 ]);
