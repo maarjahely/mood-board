@@ -12,7 +12,7 @@ export function Gallery() {
         >
           <img
             src={image.src}
-            alt=""
+            alt={image.title}
             className="h-48 w-full object-cover transition-transform duration-300 hover:scale-105"
           />
         </Link>
