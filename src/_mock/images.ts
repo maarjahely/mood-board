@@ -1,4 +1,11 @@
-export const images = [
+export type Image = {
+  id: string;
+  src: string;
+  title: string;
+  description: string;
+};
+
+export const images: Image[] = [
   {
     id: "forest",
     src: "/images/forest.jpg",

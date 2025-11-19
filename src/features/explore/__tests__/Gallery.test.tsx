@@ -3,12 +3,12 @@ import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 
 import { images } from "../../../_mock/images";
-import { Gallery } from "../Gallery";
+import { Explore } from "../Explore";
 import ImageDetailRoute from "../../ImageDetail/ImageDetailRoute";
 
 function renderWithRouter(initialPath: string = "/") {
   const routes = [
-    { path: "/", element: <Gallery /> },
+    { path: "/", element: <Explore /> },
     { path: "/image/:imageId", element: <ImageDetailRoute /> },
   ];
   const router = createMemoryRouter(routes, { initialEntries: [initialPath] });
