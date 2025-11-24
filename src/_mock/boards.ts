@@ -8,16 +8,24 @@ export type Board = {
 
 export const boards: Board[] = [
   {
-    id: "cozy-living-room",
-    title: "Cozy living room",
-    description: "Warm neutrals and soft textures",
-    imageIds: ["img1", "img3", "img7"],
+    id: "cozy-vibes",
+    title: "Cozy vibes",
+    description: "Warm, calm, slightly moody images.",
+    imageIds: ["forest", "pumpkins"],
     ownerId: "demo-user-1",
   },
   {
-    id: "tattoo-ideas",
-    title: "Tattoo ideas",
-    imageIds: ["img2", "img8"],
+    id: "canada-memories",
+    title: "Canada memories",
+    description: "Toronto and beyond.",
+    imageIds: ["lake", "downtown"],
+    ownerId: "demo-user-1",
+  },
+  {
+    id: "empty-board",
+    title: "Empty test board",
+    description: "This one has no images yet.",
+    imageIds: [],
     ownerId: "demo-user-1",
   },
 ];
