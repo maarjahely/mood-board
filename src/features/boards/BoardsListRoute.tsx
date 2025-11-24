@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { boards } from "../../_mock/boards";
 import { images } from "../../_mock/images";
+import { useAuth } from "../../auth/AuthContext";
 
 export function BoardsListRoute() {
-  const currentUserId = "demo-user-1";
+  const { user } = useAuth();
 
-  const userBoards = boards.filter((board) => board.ownerId === currentUserId);
+  const userBoards = boards.filter((board) => board.ownerId === user?.id);
 
   return (
     <div className="p-6 space-y-4">

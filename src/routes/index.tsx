@@ -6,6 +6,8 @@ import { Explore } from "../features/explore/Explore";
 import ImageDetailRoute from "../features/ImageDetail/ImageDetailRoute";
 import { BoardsListRoute } from "../features/boards/BoardsListRoute";
 import { BoardDetailRoute } from "../features/boards/BoardsDetailRoute";
+import { ProtectedRoute } from "../auth/ProtectedRoute";
+import { LoginRoute } from "../auth/LoginRoute";
 
 export const router = createBrowserRouter([
   {
@@ -18,8 +20,26 @@ export const router = createBrowserRouter([
         path: "image/:imageId",
         element: <ImageDetailRoute />,
       },
-      { path: "boards", element: <BoardsListRoute /> },
-      { path: "boards/:boardId", element: <BoardDetailRoute /> },
+      {
+        path: "boards",
+        element: (
+          <ProtectedRoute>
+            <BoardsListRoute />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "boards/:boardId",
+        element: (
+          <ProtectedRoute>
+            <BoardDetailRoute />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "login",
+        element: <LoginRoute />,
+      },
       { path: "*", element: <NotFound /> },
     ],
   },
