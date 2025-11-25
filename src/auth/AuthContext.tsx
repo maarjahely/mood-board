@@ -1,9 +1,7 @@
 import { createContext, useContext, useState, useMemo, ReactNode } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
-type AuthUser = {
-  id: string;
-  name: string;
-};
+type AuthUser = { id: string; name: string };
 
 type AuthContextValue = {
   user: AuthUser | null;
@@ -23,8 +21,13 @@ const demoUser: AuthUser = {
   name: "Demo User",
 };
 
+const LOCAL_STORAGE_KEY = "auth-user";
+
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<AuthUser | null>(null);
+  const [user, setUser] = useLocalStorage<AuthUser | null>(
+    LOCAL_STORAGE_KEY,
+    null
+  );
 
   const loginAsDemoUser = () => {
     setUser(demoUser);
