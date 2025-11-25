@@ -5,6 +5,8 @@ import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { images } from "../../../_mock/images";
 import { Explore } from "../Explore";
 import ImageDetailRoute from "../../ImageDetail/ImageDetailRoute";
+import { AuthProvider } from "../../../auth/AuthContext";
+import { BoardsProvider } from "../../boards/BoardsContext";
 
 function renderWithRouter(initialPath: string = "/") {
   const routes = [
@@ -12,7 +14,13 @@ function renderWithRouter(initialPath: string = "/") {
     { path: "/image/:imageId", element: <ImageDetailRoute /> },
   ];
   const router = createMemoryRouter(routes, { initialEntries: [initialPath] });
-  return render(<RouterProvider router={router} />);
+  return render(
+    <AuthProvider>
+      <BoardsProvider>
+        <RouterProvider router={router} />
+      </BoardsProvider>
+    </AuthProvider>
+  );
 }
 
 test("renders all images with the correct alt text", () => {
