@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, ReactNode } from "react";
 import { boards as initialBoards, type Board } from "../../_mock/boards";
 import type { Image } from "../../_mock/images";
 import { useLocalStorage } from "../../hooks/useLocalStorage";

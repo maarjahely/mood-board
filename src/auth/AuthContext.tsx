@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useMemo, ReactNode } from "react";
+import { createContext, useContext, useMemo, ReactNode } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 type AuthUser = { id: string; name: string };
