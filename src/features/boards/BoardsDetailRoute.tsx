@@ -1,15 +1,17 @@
 import { useParams } from "react-router-dom";
-import { boards } from "../../_mock/boards";
-import { images } from "../../_mock/images";
+import { Image, images } from "../../_mock/images";
 import { ImageCard } from "../../components/ImageCard";
+import { useAuth } from "../../auth/AuthContext";
+import { useBoards } from "./BoardsContext";
 
 export function BoardDetailRoute() {
-  const currentUserId = "demo-user-1";
+  const { user } = useAuth();
+  const { boards, removeImageFromBoard } = useBoards();
 
   const { boardId } = useParams<{ boardId: string }>();
 
   const board = boards.find(
-    (board) => board.id === boardId && board.ownerId === currentUserId
+    (board) => board.id === boardId && board.ownerId === user?.id
   );
 
   if (!board) {
@@ -26,6 +28,10 @@ export function BoardDetailRoute() {
   const boardImages = images.filter((image) =>
     board.imageIds.includes(image.id)
   );
+
+  const handleRemoveFromBoardClick = (image: Image) => {
+    removeImageFromBoard(board.id, image.id);
+  };
 
   return (
     <div className="p-6">
@@ -45,7 +51,19 @@ export function BoardDetailRoute() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {boardImages.map((image) => (
-            <ImageCard key={image.id} image={image} />
+            <ImageCard
+              key={image.id}
+              image={image}
+              actionSlot={
+                <button
+                  type="button"
+                  onClick={() => handleRemoveFromBoardClick(image)}
+                  className="cursor-pointer rounded-md bg-white/90 px-2 py-1 text-xs font-medium text-gray-900 shadow-sm hover:bg-white"
+                >
+                  Remove
+                </button>
+              }
+            />
           ))}
         </div>
       )}

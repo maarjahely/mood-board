@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { boards } from "../../_mock/boards";
 import { images } from "../../_mock/images";
 import { useAuth } from "../../auth/AuthContext";
+import { useBoards } from "./BoardsContext";
 
 export function BoardsListRoute() {
   const { user } = useAuth();
+  const { boards } = useBoards();
 
   const userBoards = boards.filter((board) => board.ownerId === user?.id);
 
